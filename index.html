@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Child Colleges of Butuan & Hospital Co.</title>
+    <style>
+        :root {
+            --primary: #990000;
+            --primary-dark: #730000;
+            --secondary: #E1AD01;
+            --secondary-light: #F1C40F;
+            --text-main: #2C3E50;
+            --text-muted: #7F8C8D;
+            --bg-light: #F9F9F9;
+            --white: #FFFFFF;
+            --border-color: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+            background-image: url('hccb background.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+        }
+
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .logo-text h1 {
+            font-size: clamp(0.85rem, 2.5vw, 1.2rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+            color: var(--text-muted);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            border: none;
+            background: none;
+            margin-left: auto;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            padding: 8px 14px;
+            font-size: clamp(0.78rem, 1.5vw, 0.95rem);
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        nav button:hover, nav button.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(153, 0, 0, 0.85), rgba(115, 0, 0, 0.9)), url('image_bc020a.png') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: clamp(50px, 10vw, 100px) 20px;
+            position: relative;
+        }
+
+        .hero h2 {
+            font-size: clamp(1.5rem, 5vw, 2.8rem);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .hero p {
+            font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 16px;
+            min-height: 500px;
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-left: 5px solid var(--primary);
+            padding: clamp(16px, 3vw, 30px);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+        }
+
+        /* Bio Section */
+        .bio-section {
+            background: var(--white);
+            border-radius: 8px;
+            padding: clamp(16px, 3vw, 30px);
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .bio-img {
+            width: clamp(100px, 20vw, 160px);
+            height: clamp(100px, 20vw, 160px);
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            object-fit: cover;
+            object-position: center top;
+            border: 4px solid var(--secondary);
+            flex-shrink: 0;
+        }
+
+        .bio-info h4 {
+            color: var(--primary);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: 5px;
+        }
+
+        .bio-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        /* Forms */
+        form {
+            background: var(--white);
+            padding: clamp(20px, 4vw, 40px);
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--secondary);
+        }
+
+        .form-section-title {
+            background: #FFF9E6;
+            color: var(--primary-dark);
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .form-section-title:first-of-type { margin-top: 0; }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group.full-width { grid-column: 1 / -1; }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        input, select, textarea {
+            padding: 10px 13px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 0.93rem;
+            background-color: #FCFDFE;
+            transition: border-color 0.2s;
+            width: 100%;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #A0AEC0;
+            font-style: italic;
+        }
+
+        /* File List */
+        .file-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+            gap: 14px;
+        }
+
+        .file-item {
+            background: #F8FAFC;
+            padding: 12px;
+            border: 1px dashed var(--border-color);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        /* Portal */
+        .portal-wrapper {
+            max-width: 420px;
+            margin: 30px auto;
+            padding: 0 8px;
+        }
+
+        .captcha-box {
+            background: #F1F5F9;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 4px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            user-select: none;
+            color: #334155;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .btn:hover { background-color: var(--primary-dark); }
+
+        .btn-secondary {
+            background-color: #64748B;
+            margin-top: 10px;
+            width: 100%;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover { background-color: #475569; }
+
+        .form-links {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        .form-links a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        .form-links a:hover { text-decoration: underline; }
+
+        /* Program Lists */
+        .program-list { list-style-type: none; }
+
+        .program-list li {
+            padding: 6px 0 6px 15px;
+            border-bottom: 1px solid #F1F5F9;
+            position: relative;
+        }
+
+        .program-list li::before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .nested-track {
+            margin-left: 16px;
+            background: #F8FAFC;
+            padding: 8px 10px;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* Medical Badges */
+        .service-badge {
+            display: inline-block;
+            background: #FFF1F2;
+            color: #9F1239;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin: 3px;
+            border: 1px solid #FFE4E6;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1A1A1A;
+            color: #E2E8F0;
+            padding: clamp(24px, 5vw, 40px) 20px;
+            text-align: center;
+            margin-top: 50px;
+            border-top: 4px solid var(--secondary);
+        }
+
+        footer p { font-size: 0.88rem; color: #94A3B8; }
+
+        /* Tablet */
+        @media (max-width: 900px) {
+            .nav-container { gap: 10px; }
+
+            .bio-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .bio-img {
+                margin: 0 auto;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .hamburger { display: flex; }
+
+            nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.35s ease;
+            }
+
+            nav.open { max-height: 400px; }
+
+            nav ul {
+                flex-direction: column;
+                gap: 4px;
+                width: 100%;
+                padding-bottom: 8px;
+            }
+
+            nav ul li { width: 100%; }
+
+            nav button {
+                width: 100%;
+                text-align: left;
+                padding: 10px 14px;
+                font-size: 0.92rem;
+            }
+
+            .logo-img { width: 40px; height: 40px; }
+
+            .hero { padding: 48px 16px; }
+
+            .grid-2,
+            .grid-3 { grid-template-columns: 1fr; }
+
+            .form-grid { grid-template-columns: 1fr; }
+
+            .form-group.full-width { grid-column: 1; }
+
+            .file-list { grid-template-columns: 1fr; }
+
+            form { padding: 20px 16px; }
+
+            .card { padding: 16px; }
+
+            table { font-size: 0.82rem; }
+
+            .form-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .captcha-box {
+                font-size: 0.95rem;
+                letter-spacing: 2px;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 380px) {
+            .logo-text h1 { font-size: 0.75rem; }
+            .logo-text p  { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo-area" onclick="switchTab('profile')">
+                <img src="HCCB LOGO.webp" alt="HCCB Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Holy Child Colleges of Butuan</h1>
+                    <p>An educational and healthcare corporation Information System</p>
+                </div>
+            </a>
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <nav id="main-nav">
+                <ul>
+                    <li><button onclick="switchTab('profile')"    id="btn-profile"    class="active">Overview & Profile</button></li>
+                    <li><button onclick="switchTab('programs')"   id="btn-programs">Programs Offered</button></li>
+                    <li><button onclick="switchTab('health')"     id="btn-health">Health Services</button></li>
+                    <li><button onclick="switchTab('enrollment')" id="btn-enrollment">Online Enrollment</button></li>
+                    <li><button onclick="switchTab('portal')"     id="btn-portal">Student Portal</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h2>Passion for Service and Excellence</h2>
+        <p>Serving Corporate, Educational, and Health Medical Fields Since 1998</p>
+    </div>
+
+    <div class="main-content">
+
+        <!-- PROFILE PANEL -->
+        <div id="panel-profile" class="tab-panel active">
+            <div class="grid-2">
+                <div>
+                    <div class="card">
+                        <h3>Company Profile</h3>
+                        <p style="margin-bottom: 15px; text-align: justify;"><strong>HOLY CHILD COLLEGES OF BUTUAN HOSPITAL COMPANY</strong> is a private health care facility founded on January 28, 2008. It upholds compassionate quality health care. One of its goals is to provide specialized services for children, women, and the aged, hence the Main 5-storey building shall be a general hospital in the future and there shall be separate building for specialized services for children. Women and the aged equipped with state-of-the-art health facilities manned by specialist with the heart. It shall also be a center for training for different specializations.</p>
+                        <p style="margin-bottom: 15px; text-align: justify;">HCCB Hospital envisions to be a leading medical center in the Caraga Region; it does not compete with existing hospitals, but serves the regional health concerns and needs. In due time, HCCB Hospital shall be a teaching and research hospital.</p>
+                        <p style="text-align: justify;">HCCB Hospital is the laboratory of the college of Nursing & Health Sciences and in the future the College of medicine. The Institute of Behavioral Medicine Counseling Home in Psychotherapy, the HCCB New wine counseling Home and the st. Peter's Counseling Home Davao City are some of the special features.</p>
+                    </div>
+
+                    <div class="card" style="border-left-color: var(--secondary);">
+                        <h3>Institutional Vision & Stewardship</h3>
+                        <blockquote style="font-style: italic; background: #FFFDF5; padding: 15px; border-radius: 4px;">
+                            "Believing that we are only stewards of God's bountiful blessing, the partners shall put in good use all that are God-given and the benefits entrusted to them to serve others to make this world a better place for everyone. The partners wanted to eradicate and pains among the suffering people in whatever little they can do for others."
+                        </blockquote>
+                    </div>
+
+                    <div class="card">
+                        <h3>Hospital Infrastructure Details</h3>
+                        <p style="text-align: justify;">Today, HCCB Hospital is equipped with a tertiary clinical laboratory facilities, state-of-the-art Radiology Department, an emergency room, operating room, labor room, delivery room, recovery room, isolation room, children's ward private rooms, suite rooms, prayer room, comfortable doctors' quarters where privacy is maintained, and the state-of-the-art Intensive Care Unit equipped "pipe-in" oxygen supply and with modern facilities, the waiting areas are spacious and customer-friendly.</p>
+                        <p style="margin-top: 10px; text-align: justify;">The Level 3 Clinical laboratory facilities provide 24-hour service for clients with the following services: Micro-biology, Hematology, Immuno-hematology, clinical Chemistry, clinical Microscopy, Immuno-Serology, and Drug Testing Services, among others. Radiology and Sonology services are available; the nursing service offers a warm welcome to all clients; the pharmacy offers medicine at affordable and reasonable cost, and the Family Planning clinic for community service.</p>
+                        <div style="overflow-x: auto; margin-top: 15px;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 280px;">
+                                <tr style="background: #F1F5F9;"><td style="padding: 8px; font-weight: bold;">Date Founded</td><td style="padding: 8px;">January 30, 2008</td></tr>
+                                <tr><td style="padding: 8px; font-weight: bold;">Permit to Construct (PTC)</td><td style="padding: 8px;">Level 3 Standard</td></tr>
+                                <tr style="background: #F1F5F9;"><td style="padding: 8px; font-weight: bold;">Proposed Capacity</td><td style="padding: 8px;">200 Beds</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card" style="border-left-color: var(--secondary);">
+                        <h3>Hospital Administration</h3>
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
+                            <li><strong>Hospital Director:</strong> Emmanuel Rivera, M.S. Hosp. Admin.</li>
+                            <li><strong>Chief Director:</strong> Violeta Q. Conejos-Rendon, M.D., FPAFP, Fellow, Family Medicine</li>
+                            <li><strong>Administrator:</strong> Florminda B. Tejano, DPA, Ph. D., CHA</li>
+                        </ul>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Company Owners & Partnerships</h3>
+
+                    <div class="bio-section">
+                        <img src="Steves.webp" alt="Dr. Rodulfo Pimentel Esteves" class="bio-img">
+                        <div class="bio-info">
+                            <h4>Rodulfo Pimentel Esteves, Ph.D.</h4>
+                            <div class="bio-subtitle">Diplomate IABMCP, Fellow PCHA | Diplomate in Behavioral Medicine</div>
+                            <p style="font-size: 0.85rem; text-align: justify; color: #475569;">Registered Licensed Guidance Counselor & Psychometrician. Adviser to Chi Sigma Iota-Iota Phi Counseling Academic & Professional Honor Society International. Dr. Esteves has served thirty years in state university systems before managing educational and health clinical systems throughout Mindanao including St. Peter's Counseling Home and Holy Child Colleges of Davao Oriental.</p>
+                        </div>
+                    </div>
+
+                    <div class="bio-section">
+                        <img src="Gargar.webp" alt="Dr. Felomino Abrenica Gargar" class="bio-img">
+                        <div class="bio-info">
+                            <h4>Felomino Abrenica Gargar, Ed.D.</h4>
+                            <div class="bio-subtitle">Diplomate IABMCP, Fellow PCHA | Diplomate in Professional Psychotherapy</div>
+                            <p style="font-size: 0.85rem; text-align: justify; color: #475569;">Registered Licensed Guidance Counselor, Psychometrician, and Vice President of HCCB. Top classicist alumnus from St. Francis College Seminary and former international delegate to the Council of Youth in France. Served as Dean and Professor VI before co-founding the institutional healthcare ecosystem.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROGRAMS PANEL -->
+        <div id="panel-programs" class="tab-panel">
+            <h2 style="color: var(--primary); margin-bottom: 20px; border-bottom: 3px solid var(--secondary); padding-bottom: 10px; font-size: clamp(1.2rem, 4vw, 1.8rem);">Educational Programs Matrix</h2>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3>DepEd Programs</h3>
+                    <ul class="program-list">
+                        <li>Distance Secondary Education Program (DSEP)</li>
+                        <li>Science and Technology High School</li>
+                        <li>
+                            <strong>POSH ACADEMY</strong>
+                            <div class="nested-track">Play School | Special Education Classes | Kindergarten to Grade 10</div>
+                        </li>
+                        <li>
+                            <strong>SENIOR HIGH SCHOOL</strong>
+                            <div class="nested-track"><strong>Academic Track:</strong> STEM, ABM, HUMSS, GAS</div>
+                            <div class="nested-track">
+                                <strong>TVL Track:</strong>
+                                <small style="display:block; color:#64748B; margin-top:4px;">• Home Economics (Caregiving, Cookery, Bread/Pastry, F&B, Housekeeping, Local Guiding & Tourism Promotion)</small>
+                                <small style="display:block; color:#64748B; margin-top:4px;">• ICT (Computer System Servicing, Computer Programming, Animation)</small>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-left-color: var(--secondary);">
+                    <h3>CHED Programs</h3>
+                    <strong style="color: var(--primary); font-size:0.9rem; display:block; margin-top:10px;">GRADUATE SCHOOL</strong>
+                    <ul class="program-list">
+                        <li>Master of Arts in Guidance & Counseling</li>
+                        <li>Diploma in Teaching Early Childhood Education</li>
+                        <li>Diploma in Teaching Special Education</li>
+                    </ul>
+                    <strong style="color: var(--primary); font-size:0.9rem; display:block; margin-top:15px;">BACCALAUREATE DEGREES</strong>
+                    <ul class="program-list">
+                        <li>Bachelor of Science in Social Work</li>
+                        <li>Bachelor of Science in Midwifery Education</li>
+                        <li>Bachelor of Science in Criminology</li>
+                        <li>Bachelor of Science in Guidance and Counseling</li>
+                        <li>Bachelor of Elementary Education (Early Childhood / Special Ed)</li>
+                        <li>Bachelor of Secondary Education (English, Math, Biological Sci, Values Ed)</li>
+                        <li>Bachelor of Science in Tourism</li>
+                        <li>Bachelor of Science in Business Administration (Economics / Financial Management)</li>
+                        <li>Bachelor of Science in Hotel & Restaurant Management</li>
+                        <li>Bachelor of Science in Information Technology</li>
+                        <li>Bachelor of Arts (Theology / Religious Ed / Pastoral Studies)</li>
+                        <li>Bachelor of Arts in Development Communication</li>
+                        <li>Two-Year Diploma in Midwifery Education</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>TESDA Programs</h3>
+                    <strong style="color: var(--primary); font-size:0.9rem; display:block; margin-top:10px;">DIPLOMA TRACKS</strong>
+                    <ul class="program-list">
+                        <li>Diploma in Hospitality Industry Technology</li>
+                        <li>Diploma in Human Development Services Technology</li>
+                        <li>Diploma in Business Technology</li>
+                        <li>Diploma in Development Communication Technology</li>
+                        <li>Diploma in Health Services Technology</li>
+                        <li>Diploma in Tourism Technology</li>
+                        <li>Diploma in Information and Communications Technology</li>
+                        <li>Diploma in Judicial System Technology</li>
+                    </ul>
+                    <strong style="color: var(--primary); font-size:0.9rem; display:block; margin-top:15px;">CERTIFICATE & NC COURSES</strong>
+                    <ul class="program-list">
+                        <li>Two-year Practical Nursing / Tourism Management</li>
+                        <li>Two-year Broadcast Communication NC II</li>
+                        <li>Two-year Certificate in Occupational Therapy</li>
+                        <li>Two-year Computer Secretarial / Programming</li>
+                        <li>Two-year Hotel, Restaurant, Resort Management</li>
+                        <li>Food and Beverage Services NC II / Bartending NC II</li>
+                        <li>Housekeeping NC II</li>
+                        <li>Six-month Live-in Caregiver Course NC II</li>
+                        <li>One-year Professional Caregiver NC II / Driving NC II</li>
+                        <li>Security Courses (Basic Supervisory NC I / In-Service NC I / Pre-Licensing NC I)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- HEALTH PANEL -->
+        <div id="panel-health" class="tab-panel">
+            <div class="card" style="max-width: 900px; margin: 0 auto;">
+                <h3>HCCB Hospital Health & Clinical Services</h3>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">Comprehensive out-patient, specialized, surgical, and emergency operational facilities operating 24/7.</p>
+
+                <h4 style="color: var(--primary); margin: 15px 0 8px 0;">Specialized Clinical Operations</h4>
+                <div>
+                    <span class="service-badge">Family Medicine</span>
+                    <span class="service-badge">Internal Medicine</span>
+                    <span class="service-badge">Obstetric & Gynecology</span>
+                    <span class="service-badge">General Surgery</span>
+                    <span class="service-badge">Orthopedic Surgery</span>
+                    <span class="service-badge">Ophthalmology Surgery (Cataract)</span>
+                    <span class="service-badge">Urology Surgery</span>
+                    <span class="service-badge">Pediatric Care</span>
+                </div>
+
+                <div class="grid-2" style="margin-top: 25px;">
+                    <div style="background: #FAFAFA; padding: 18px; border-radius: 6px; border-left: 4px solid var(--primary);">
+                        <strong style="display:block; font-size:1.05rem; margin-bottom:10px; color: var(--primary);">Out-Patient Department (24/7)</strong>
+                        <ul style="padding-left: 20px; font-size: 0.93rem;">
+                            <li>General Clinical Consultation</li>
+                            <li>Wound Care Management</li>
+                            <li>Minor Surgical Procedures</li>
+                            <li>Annual Physical Examinations</li>
+                            <li>Pre-employment Screening Systems</li>
+                        </ul>
+                    </div>
+                    <div style="background: #FAFAFA; padding: 18px; border-radius: 6px; border-left: 4px solid var(--secondary);">
+                        <strong style="display:block; font-size:1.05rem; margin-bottom:10px; color: var(--primary-dark);">Emergency Department (24/7)</strong>
+                        <ul style="padding-left: 20px; font-size: 0.93rem;">
+                            <li>Acute & Urgent Care Systems</li>
+                            <li>Trauma Care Infrastructure</li>
+                            <li>24-Hour Pipeline Oxygen Systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ENROLLMENT PANEL -->
+        <div id="panel-enrollment" class="tab-panel">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 10px; color: var(--primary); font-size: clamp(1.2rem, 4vw, 1.7rem);">Institutional Enrollment Application Form</h2>
+                <p style="text-align: center; margin-bottom: 28px; color: var(--text-muted); font-size: 0.9rem;">Please fill out all sections accurately to process your academic profile system configuration.</p>
+
+                <form onsubmit="event.preventDefault(); alert('Enrollment entry mock submitted.');">
+
+                    <div class="form-section-title">1. Personal Information</div>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Last Name, First Name, Middle Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select required>
+                                <option value="">Select Gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" min="0" max="100" placeholder="Enter your age" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Civil Status</label>
+                            <select required>
+                                <option value="">Select Status</option>
+                                <option>Single</option>
+                                <option>Married</option>
+                                <option>Separated</option>
+                                <option>Widowed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nationality</label>
+                            <input type="text" placeholder="e.g., Filipino" value="Filipino" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Religion</label>
+                            <input type="text" placeholder="e.g., Roman Catholic">
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Number</label>
+                            <input type="tel" placeholder="09XXXXXXXXX" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="Enter Email" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Home Address</label>
+                            <input type="text" placeholder="House No., Street, Barangay, City, Province" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">2. Academic Information</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Student ID Number (For Old/Returning Students)</label>
+                            <input type="text" placeholder="XX-XXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Course / Program Desired</label>
+                            <input type="text" placeholder="e.g., BS in Social Work" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Year Level</label>
+                            <select required>
+                                <option value="">Select Level</option>
+                                <option>1st Year</option>
+                                <option>2nd Year</option>
+                                <option>3rd Year</option>
+                                <option>4th Year</option>
+                                <option>Graduate Track</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Semester / School Year</label>
+                            <input type="text" placeholder="e.g., 1st Sem 2026-2027" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last School Attended</label>
+                            <input type="text" placeholder="Name of school" required>
+                        </div>
+                        <div class="form-group">
+                            <label>General Average (Last Grade)</label>
+                            <input type="text" placeholder="e.g., 88.5">
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">3. Family Background</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Father's Full Name</label>
+                            <input type="text" placeholder="Last Name, First Name, M.I.">
+                        </div>
+                        <div class="form-group">
+                            <label>Father's Occupation</label>
+                            <input type="text" placeholder="e.g., Engineer">
+                        </div>
+                        <div class="form-group">
+                            <label>Mother's Full Name</label>
+                            <input type="text" placeholder="Last Name, First Name, M.I.">
+                        </div>
+                        <div class="form-group">
+                            <label>Mother's Occupation</label>
+                            <input type="text" placeholder="e.g., Teacher">
+                        </div>
+                        <div class="form-group">
+                            <label>Guardian's Name (if applicable)</label>
+                            <input type="text" placeholder="Last Name, First Name, M.I.">
+                        </div>
+                        <div class="form-group">
+                            <label>Guardian's Contact Number</label>
+                            <input type="tel" placeholder="09XXXXXXXXX">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Parent / Guardian Address</label>
+                            <input type="text" placeholder="House No., Street, Barangay, City, Province">
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">4. Required Documents</div>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px;">Upload scanned copies of all applicable documents (PDF or JPG, max 5MB each).</p>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <label>Form 138 / Report Card</label>
+                            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                        <div class="file-item">
+                            <label>PSA Birth Certificate</label>
+                            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                        <div class="file-item">
+                            <label>Certificate of Good Moral Character</label>
+                            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                        <div class="file-item">
+                            <label>2x2 ID Photo (White Background)</label>
+                            <input type="file" accept=".jpg,.jpeg,.png">
+                        </div>
+                        <div class="file-item">
+                            <label>Barangay Clearance</label>
+                            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                        <div class="file-item">
+                            <label>Medical Certificate</label>
+                            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 30px; text-align: center;">
+                        <button type="submit" class="btn" style="max-width: 300px; margin: 0 auto;">Submit Enrollment Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- PORTAL PANEL -->
+        <div id="panel-portal" class="tab-panel">
+            <div class="portal-wrapper">
+                <h2 style="color: var(--primary); text-align: center; margin-bottom: 6px; font-size: clamp(1.2rem, 4vw, 1.6rem);">Student Portal Login</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Access your academic records, schedules, and more.</p>
+
+                <form onsubmit="event.preventDefault(); alert('Login mock submitted.');">
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label>Student ID / Username</label>
+                        <input type="text" placeholder="Username" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter Email" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label>Password</label>
+                        <input type="password" placeholder="Type your password" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label>CAPTCHA Verification</label>
+                        <div class="captcha-box" style="margin-bottom: 8px;">H9 X2 T7</div>
+                        <input type="text" placeholder="Type the characters shown above" required>
+                    </div>
+
+                    <button type="submit" class="btn">Sign In to Portal</button>
+                    <a href="#" class="btn-secondary" onclick="switchTab('enrollment'); return false;">New Student? Enroll Online</a>
+
+                    <div class="form-links">
+                        <a href="#">Forgot Password?</a>
+                        <a href="#">Need Help?</a>
+                    </div>
+                </form>
+
+                <div style="margin-top: 30px; background: #FFF9E6; border-radius: 8px; padding: 16px; border: 1px solid #F1C40F;">
+                    <p style="font-size: 0.85rem; color: #7A4F00; text-align: center;">
+                        <strong>Need assistance?</strong> Contact the Registrar's Office at
+                        <strong>(085) 342-HCCB</strong> or email <strong>registrar@hccb.edu.ph</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end .main-content -->
+
+    <footer>
+        <p style="font-size: 1rem; font-weight: 700; color: var(--secondary); margin-bottom: 8px;">Holy Child Colleges of Butuan & Hospital Co.</p>
+        <p>2nd St., Guingona Subdivision, Butuan City, Philippines, 8600</p>
+        <p>Telephone: (085) 342-3975</p>
+        <p>Cellphones: 0998-530-1889 | 0963-973-0799</p>
+        <p style="margin-top: 8px;">&copy; 2026 HCCB. All Rights Reserved.</p>
+
+    </footer>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+
+            document.getElementById('panel-' + tab).classList.add('active');
+            document.getElementById('btn-' + tab).classList.add('active');
+
+            document.getElementById('main-nav').classList.remove('open');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMenu() {
+            document.getElementById('main-nav').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
